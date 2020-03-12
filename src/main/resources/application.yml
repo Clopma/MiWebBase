@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/10moods?serverTimezone=Europe/Madrid
+    username: root
+    password: karateka123
+  jpa:
+    hibernate:
+      ddl-auto: update
+  resources:
+    static-locations: classpath:/static/

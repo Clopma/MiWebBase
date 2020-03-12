@@ -1,0 +1,28 @@
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>El login de mi web</title>
+    <th:block th:include="fragments/heads :: genericHead"></th:block>
+</head>
+<body class="loginbg">
+<div>
+    <form name="f" th:action="@{/login}" method="post">
+        <fieldset>
+            <legend>Identifícate</legend>
+            <div th:if="${param.error}" class="alert alert-error">
+                Invalid username and password.
+            </div>
+            <div th:if="${param.logout}" class="alert alert-success">
+                You have been logged out.
+            </div>
+            <label for="username">Nombre de usuario</label>
+            <input type="text" id="username" name="username"/>
+            <label for="password">Contraseña</label>
+            <input type="password" id="password" name="password"/>
+            <div class="form-actions">
+                <button type="submit" class="btn">Entrar</button>
+            </div>
+        </fieldset>
+    </form>
+</div>
+</body>
+</html>
