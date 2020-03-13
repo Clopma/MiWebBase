@@ -2,10 +2,13 @@ package com.example.miwebbase;
 
 import com.example.miwebbase.Entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.sql.DataSource;
 
@@ -22,10 +25,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .dataSource(dataSource)
                 .usersByUsernameQuery("select " + User.C_USUARIO + ", " + User.C_CONTRASEÑA + " , 'true' "
                         + "from " +  User.T_USUARIOS  + " "
-                        + "where " +  User.C_USUARIO + " = ?");
-//                .authoritiesByUsernameQuery("select " +  User.C_USUARIO  + ", 'ROLE_USER' "
-//                        + "from " + User.T_USUARIOS + " "
-//                        + "where " +  User.C_USUARIO  + " = ?");
+                        + "where " +  User.C_USUARIO + " = ?")
+                .authoritiesByUsernameQuery("select " +  User.C_USUARIO  + ", 'ROLE_USER' "
+                        + "from " + User.T_USUARIOS + " "
+                        + "where " +  User.C_USUARIO  + " = ?");
 
 
 
@@ -47,6 +50,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .logoutUrl("/perform_logout")
 //                .deleteCookies("JSESSIONID");
 
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() throws Exception {
+        return new BCryptPasswordEncoder();
     }
 
 
