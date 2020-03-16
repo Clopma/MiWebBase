@@ -1,22 +1,19 @@
 package com.example.miwebbase.Entities;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Table(name = User.T_USUARIOS)
 @Entity
-@Data
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class User {
 
     public static final String T_USUARIOS = "Usuarios";
-
-    public User(String username, String hashedPassword) {
-        this.username = username;
-        this.hashedPassword = hashedPassword;
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,11 +24,13 @@ public class User {
     private String username;
 
     public static final String C_CONTRASEÑA = "contraseña";
-    @Column(name = C_CONTRASEÑA, length = 255)
+    @Column(name = C_CONTRASEÑA)
     private String hashedPassword;
+
 
     public static final String C_HABILITADO = "habilitado";
     @Column(name = C_HABILITADO)
+    @Builder.Default
     private boolean enabled = true;
 
 

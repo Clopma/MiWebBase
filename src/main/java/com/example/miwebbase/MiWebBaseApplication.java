@@ -9,26 +9,27 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.annotation.PostConstruct;
 
-@SpringBootApplication public class MiWebBaseApplication {
-
-
-    @Autowired
-    UserRepository userRepository;
+@SpringBootApplication
+public class MiWebBaseApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(MiWebBaseApplication.class, args);
 
     }
 
+    @Autowired
+    UserRepository userRepository;
+
 
     @PostConstruct
     public void init() {
-        User activado = new User("test", "$2a$10$J.EQEoXXCmUbl1QKbPCxwu5Q4uBlTExA9asr5xh/LfayOxXkBjnMm");
+
+        User activado = User.builder().username("test").hashedPassword("$2a$10$J.EQEoXXCmUbl1QKbPCxwu5Q4uBlTExA9asr5xh/LfayOxXkBjnMm").build();
         userRepository.save(activado);
 
-        User desactivado = new User("test2", "$2a$10$J.EQEoXXCmUbl1QKbPCxwu5Q4uBlTExA9asr5xh/LfayOxXkBjnMm");
-        desactivado.setEnabled(false);
+        User desactivado = User.builder().username("test2").hashedPassword("$2a$10$J.EQEoXXCmUbl1QKbPCxwu5Q4uBlTExA9asr5xh/LfayOxXkBjnMm").enabled(false).build();
         userRepository.save(desactivado);
+
     }
 
 }
