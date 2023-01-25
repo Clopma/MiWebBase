@@ -1,11 +1,14 @@
 spring:
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/10moods?serverTimezone=Europe/Madrid
-    username: root
-    password: karateka123
+    url: jdbc:mysql://localhost:3306/vamptasiadb?serverTimezone=Europe/Madrid
+    username: backend
+    password: backend1234
   jpa:
+    database: mysql
+    defer-datasource-initialization: true
     hibernate:
       ddl-auto: create-drop
-  resources:
-    static-locations: classpath:/static/
+  sql:
+    init:
+      mode: always
